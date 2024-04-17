@@ -27,8 +27,13 @@ Download Docker Here https://www.docker.com/products/docker-desktop/
    ```
 
 ### Database Migrations
-
 To make database migrations, use the following command:
+```
+python manage.py makemigrations  # This command creates migration files based on your model changes
+python manage.py migrate         # This command applies the migration files to the database
+```
+
+To make database migrations( while the container is running), use the following command:
 `docker-compose exec web python manage.py migrate`
 
 ### Restarting and Running service
