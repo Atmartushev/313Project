@@ -1,6 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import UserProfile
+from core.models import ProductVariation
 
-# Create your models here.
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    product = models.ManyToManyField(ProductVariation)
+
+    def total_price(self):
+        return sum(product.price for product in self.products.all())

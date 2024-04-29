@@ -1,5 +1,4 @@
 from django.db import models
-from .models import Cart
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -19,7 +18,6 @@ class Size(models.Model):
     description = models.TextField(blank=True, null=True)  # Additional details, if needed
 
 class ProductVariation(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
