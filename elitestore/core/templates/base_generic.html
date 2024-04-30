@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Athlete Outlet</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+  <header>
+    <div class="top-nav">
+      <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Elite Athlete Outlet">
+      </div>
+      <nav>
+        <ul>
+          <li class="dropdown">
+            <a href="javascript:void(0)">Sports</a>
+            <div class="dropdown-content">
+              <a href="#">Baseball</a>
+              <a href="#">Basketball</a>
+              <a href="#">Soccer</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)">Men</a>
+            <div class="dropdown-content">
+              <a href="#">T-Shirts</a>
+              <a href="#">Shoes</a>
+              <a href="#">Accessories</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)">Women</a>
+            <div class="dropdown-content">
+              <a href="#">Tops</a>
+              <a href="#">Leggings</a>
+              <a href="#">Outerwear</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="javascript:void(0)">About Us</a>
+            <div class="dropdown-content">
+              <a href="#">Our Story</a>
+              <a href="#">Meet the Team</a>
+              <a href="#">Careers</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="social-media">
+        <a href="#"><img src="{% static 'images/instagram-icon.png' %}" alt="Instagram"></a>
+        <a href="#"><img src="{% static 'images/twitter-icon.png' %}" alt="Twitter"></a>
+      </div>
+      <div class="search">
+        <input type="text" placeholder="Search">
+        <button type="submit"><img src="{% static 'images/search-icon.png' %}" alt="Search"></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <!-- Additional content goes here -->
+  <footer>
+    <div class="footer-content">
+      <p>
+        Elite Athlete Outlet is a sports apparel store that provides the best selection of high-quality athletic
+        wear
+      </p>
+  </footer>
+</body>
+
+</html>
