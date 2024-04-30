@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <!-- Include CSS stylesheets or links to external stylesheets -->
-</head>
-<body>
+{% extends "base_generic.html" %}
+
+{% block content %}
     <div class="container">
         <div class="product-image">
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -14,9 +8,8 @@
         <div class="product-details">
             <h1>{{ product.name }}</h1>
             <p>{{ product.description }}</p>
-            <p>Price: ${{ product.price }}</p>
-            <!-- Add more details as needed --> 
+            <p>Price: ${{ product.price }}</p>        
         </div>
     </div>
-</body>
-</html>
+
+{% endblock %}
