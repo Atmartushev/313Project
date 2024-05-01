@@ -12,10 +12,7 @@ def index(request):
     # Generate counts of some of the main objects
 
     # Render the HTML template index.html with the data in the context variable.
-    return render(
-        request,
-        'index.html'
-    )
+    return render(request, 'index.html')
 
 
 # Product views
@@ -23,11 +20,13 @@ class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
 
-    def get_queryseet(self):
+    def get_queryset(self):
         category_name = self.kwargs['category_name']
-        return Product.objects.filter(category__name__iexact=category_name)
-
-
+        if category_name=='All':
+            return Product.objects.all()
+        else:
+            return Product.objects.filter(category__name__iexact=category_name)
+        
 
 class ProductDetailView(DetailView):
     model = Product

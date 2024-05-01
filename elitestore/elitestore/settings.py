@@ -121,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Define the directory where media files will be stored
+MEDIA_ROOT = BASE_DIR / 'media'
    
 
 # Default primary key field type
