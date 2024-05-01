@@ -37,7 +37,6 @@ class ProductVariation(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
-    stock = models.IntegerField()
 
     class Meta:
         unique_together = ('product', 'color', 'size')  # Ensures each combination is unique
