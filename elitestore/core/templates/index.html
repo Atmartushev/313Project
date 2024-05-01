@@ -1,12 +1,54 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class="modern-welcome">
-  <h1 class="welcome-heading">Welcome to LocalLibrary</h1>
-  <p class="welcome-text">
-    Discover a world of knowledge and adventure with our collection. Curated by
-    <em class="mozilla">Mozilla Developer Network</em>.
-  </p>
+{% load static %}
+
+<div class="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/baseball.png' %}" alt="Baseball Sale">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/footballs.png' %}" alt="More Baseball Deals">
+    </div>
+    <!-- Add more items here -->
+  </div>
+  <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
+    <img class="carousel-control-prev-icon" src="{% static 'images/chevron.png' %}" alt="Previous">
+  </a>
+  <a class="carousel-control-next" href="#" role="button" data-slide="next">
+    <img class="carousel-control-next-icon" src="{% static 'images/chevron.png' %}" alt="Next">
+  </a>
 </div>
+
+<script>
+  document.querySelectorAll('.carousel-control-prev').forEach(item => {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+      moveSlide('prev');
+    });
+  });
+
+  document.querySelectorAll('.carousel-control-next').forEach(item => {
+    item.addEventListener('click', function (e) {
+      e.preventDefault();
+      moveSlide('next');
+    });
+  });
+
+  function moveSlide(direction) {
+    let currentSlide = document.querySelector('.carousel-item.active');
+    let nextSlide = (direction === 'next') ? currentSlide.nextElementSibling : currentSlide.previousElementSibling;
+
+    if (!nextSlide) {
+      nextSlide = (direction === 'next') ?
+        document.querySelector('.carousel-inner').firstElementChild :
+        document.querySelector('.carousel-inner').lastElementChild;
+    }
+
+    currentSlide.classList.remove('active');
+    nextSlide.classList.add('active');
+  }
+</script>
 
 {% endblock %}
