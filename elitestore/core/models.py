@@ -17,7 +17,7 @@ class Product(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.name
-
+    
 class Color(models.Model):
     name = models.CharField(max_length=50)
     hex_value = models.CharField(max_length=7, blank=True, null=True)  # For web color representation

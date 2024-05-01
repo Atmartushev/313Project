@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Athlete Outlet</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-
+{% load static %}
 <header>
     <div class="top-nav">
         <div class="logo">
@@ -17,7 +7,7 @@
         <nav>
             <ul>
                 <li class="dropdown">
-                    <a href="javascript:void(0)">Sports</a>
+                    <a href="javascript:void(0)" class="chevron-link">Sports</a>
                     <div class="dropdown-content">
                         <a href="/All/">All sports</a>
                         <a href="/Baseball/">Baseball</a>
@@ -26,7 +16,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)">Men</a>
+                    <a href="javascript:void(0)" class="chevron-link">Men</a>
                     <div class="dropdown-content">
                         <a href="#">T-Shirts</a>
                         <a href="#">Shoes</a>
@@ -34,7 +24,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)">Women</a>
+                    <a href="javascript:void(0)" class="chevron-link">Women</a>
                     <div class="dropdown-content">
                         <a href="#">Tops</a>
                         <a href="#">Leggings</a>
@@ -42,7 +32,7 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)">About Us</a>
+                    <a href="javascript:void(0)" class="chevron-link">About Us</a>
                     <div class="dropdown-content">
                         <a href="#">Our Story</a>
                         <a href="#">Meet the Team</a>
@@ -52,15 +42,14 @@
             </ul>
         </nav>
 
-        <div class="social-media">
+        <div class="icons-social">
             <a href="#"><img src="{% static 'images/instagram-icon.png' %}" alt="Instagram"></a>
-            <a href="#"><img src="{% static 'images/twitter-icon.png' %}" alt="Twitter"></a>
+            <a href="#"><img src="{% static 'images/twitter-logo.png' %}" alt="Twitter"></a>
         </div>
         <div class="search">
             <input type="text" placeholder="Search">
-            <button type="submit"><img src="{% static 'images/search-icon.png' %}" alt="Search"></button>
+            <button type="submit"><img class="image-icons" src="{% static 'images/search-icon.png' %}"
+                    alt="Search"></button>
         </div>
     </div>
 </header>
-
-</html>

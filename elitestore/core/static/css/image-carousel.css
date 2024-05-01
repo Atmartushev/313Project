@@ -1,0 +1,58 @@
+.carousel {
+  width: 100%; /* Ensures carousel width is the full width of the screen */
+  position: relative; /* Establishes a positioning context for absolute children */
+  overflow: hidden;
+}
+
+.carousel-inner {
+  width: 100%;
+}
+
+.carousel-item {
+  width: 100%;
+  display: none; /* Only active item will be visible */
+  position: relative;
+}
+
+.carousel-item.active {
+  display: block; /* Makes the active item visible */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 45vh; /* Ensures the image height is 35% of the viewport height */
+  display: block; /* Makes the active item visible */
+}
+
+.carousel-control-next {
+  position: absolute;
+  top: 50%; /* Centers vertically */
+  transform: translateY(-50%); /* Keeps the button centered at the height */
+  text-decoration: none;
+  padding: 10px;
+}
+
+.carousel-control-prev {
+  left: 0; /* Aligns to the very edge of the carousel */
+}
+
+.carousel-control-next {
+  right: 0; /* Aligns to the very edge of the carousel */
+}
+
+.carousel-control-prev {
+  position: absolute;
+  top: 50%; /* Centers vertically */
+  transform: translateY(-50%) rotate(180deg);
+  padding: 10px;
+}
+
+.carousel-control-prev img {
+  height: 150px;
+  width: 100px;
+}
+
+.carousel-control-next img {
+  height: 150px;
+  width: 100px;
+}
