@@ -12,7 +12,7 @@ def index(request):
     # Generate counts of some of the main objects
 
     # Render the HTML template index.html with the data in the context variable.
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'load_bootstrap': False})
 
 
 # Product views
