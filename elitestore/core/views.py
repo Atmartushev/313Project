@@ -22,7 +22,10 @@ def index(request):
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
-    context_object_name = 'product'
+
+    def get_queryseet(self):
+        category_name = self.kwargs['category_name']
+        return Product.objects.filter(category__name__iexact=category_name)
 
 
 

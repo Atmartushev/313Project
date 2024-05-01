@@ -1,15 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Product List</h1>
-    <div class="product-list">
-        {% for product in product %}
-            <div class="product-item">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                <h2>{{ product.name }}</h2>
-                <p>Price: ${{ product.price }}</p>  
-                <!-- Add more details or buttons as needed -->
-            </div>
+    <h1>Products in {{ view.kwargs.catergory_name }}</h1>
+    <div class="product-list">      
+        {% for product in object_list %}
+            <a href="{% url 'product_detail' pk=product.pk %}">{{product.name}}</a>
         {% endfor %}
     </div>
 {% endblock %}

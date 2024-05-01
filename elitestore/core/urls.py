@@ -23,7 +23,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     # Product URLs
-    path('product_list/', views.ProductListView.as_view(), name='product_list'),
+    path('<str:category_name>/', views.ProductListView.as_view(), name='product_list'),
     path('product_detail/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),       
 ]
 
