@@ -9,8 +9,10 @@
         <div class="col-md-9">
             <h1>{{ product.name }}</h1>
             <p>{{ product.description }}</p>
-            <p>Price: ${{ product.price }}</p>   
+            <p>Price: ${{ product.price }}</p>
+            <a href="{% url 'AddToCart' product.pk %}">Add to Cart</a>
         </div>
     </div>
 </div>
+<a href="{% url 'cart' %}">Go to Cart</a>
 {% endblock %}
