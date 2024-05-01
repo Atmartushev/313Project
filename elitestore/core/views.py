@@ -1,9 +1,11 @@
 
+from pyexpat.errors import messages
+from urllib import request
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Category, Product, Color, Size, ProductVariation
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 
 # Create your views here.
