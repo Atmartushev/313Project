@@ -46,16 +46,6 @@ nav ul li {
   display: block;
 }
 
-html,
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  flex-shrink: 0; /* This will prevent the footer from shrinking */
-}
-
 .top-nav {
   display: flex;
   align-items: center;
@@ -125,4 +115,25 @@ a.chevron:hover::after {
   height: 50px;
   width: 50px;
   margin-right: 15px;
+}
+
+html,
+body {
+  height: 100%; /* Ensure the html and body are full height */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  min-height: 100vh; /* Minimum height of 100% of the viewport height */
+}
+
+main {
+  flex-grow: 1; /* Allows the main content to grow and occupy any additional space */
+}
+
+footer {
+  margin-top: auto; /* Automatically pushes the footer to the bottom */
 }
