@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Product List</h1>
+    <div class="product-list">
+        {% for product in product %}
+            <div class="product-item">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>Price: ${{ product.price }}</p>  
+                <!-- Add more details or buttons as needed -->
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

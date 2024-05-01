@@ -22,11 +22,12 @@ def index(request):
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
+    context_object_name = 'product'
+
+
 
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
+    context_object_name = 'product'
 
-def item_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, 'item_detail.html', {'product': product})
