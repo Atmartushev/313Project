@@ -1,5 +1,4 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <header>
     <div class="top-nav">
         <div class="logo">
@@ -20,9 +19,11 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="chevron-link">Sports</a>
                     <div class="dropdown-content">
-                        <a href="/products/All">All</a>
-                        <a href="/products/Baseball">Baseball</a>
-                        <a href="/products/Golf">Golf</a>
+                        <a href="/All">All</a>
+                        <a href="/Baseball">Baseball</a>
+                        <a href="/Golf">Golf</a>
+                        <a href="/Basketball">Basketball</a>
+                        <a href="/Football">Football</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -42,7 +43,7 @@
                     <a href="{% url 'login' %}">Login</a>
                 </li>
                 {% endif %}
-                
+
             </ul>
         </nav>
 
@@ -58,11 +59,12 @@
         <nav>
             <ul>
                 <li>
-                    <a href="{% url 'cart' %}"><img class="cart-icon" src="{% static 'images/cart.jpg' %}" alt="My Cart"></a>
-                    
+                    <a href="{% url 'cart' %}"><img class="cart-icon" src="{% static 'images/cart.jpg' %}"
+                            alt="My Cart"></a>
+
                 </li>
             </ul>
         </nav>
-        
+
     </div>
 </header>

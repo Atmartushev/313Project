@@ -21,11 +21,11 @@ class ProductListView(ListView):
     
 
     def get_queryset(self):
-        category_name = self.kwargs['category_name']
-        if category_name=='All':
+        self.category_name = self.kwargs['category_name']
+        if self.category_name=='All':
             return Product.objects.all()
         else:
-            return Product.objects.filter(category__name__iexact=category_name)
+            return Product.objects.filter(category__name__iexact=self.category_name)
         
 
 def product_detail(request, pk):
@@ -76,12 +76,12 @@ def our_story(request):
 def meet_team(request):
     return render(request, 'meet_team.html')
 
-def career_list(request):
-    career = Career.objects.all()
-    context = {
-        'career_list': career,
-    }
-    return render(request, 'career_list.html', context)
+class CareerListView(ListView):
+    model = Career
+    template_name = 'career_list.html'
+    
+    def get_queryset(self):
+        return Career.objects.all()
 
 def career_detail(request, pk):
     career = Career.objects.get(pk=pk)
