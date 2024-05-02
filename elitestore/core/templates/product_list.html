@@ -1,6 +1,5 @@
 {% extends "base_generic.html" %}
-{% block content %}
-    <h1>Products in {{ view.kwargs.category_name }}</h1>    
+{% block content %}  
         {% for product in object_list %}
         <div class="container border my-3 p-2">
             <div class="row">
