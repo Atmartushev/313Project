@@ -1,4 +1,5 @@
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <header>
     <div class="top-nav">
         <div class="logo">
@@ -9,32 +10,19 @@
         <nav>
             <ul>
                 <li>
+                    {% if request.user.is_authenticated %}
+                    <h1>Welcome {{ user.username|title }}!</h1>
+                    {% endif %}
+                </li>
+                <li>
                     <a href="/">Home</a>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="chevron-link">Sports</a>
                     <div class="dropdown-content">
-                        <a href="/All/">All sports</a>
-                        <a href="/Baseball/">Baseball</a>
-                        <a href="/Basketball/">Basketball</a>
-                        <a href="/Golf/">Golf</a>
-                        <a href="/Football/">Golf</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="chevron-link">Men</a>
-                    <div class="dropdown-content">
-                        <a href="#">T-Shirts</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Accessories</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="chevron-link">Women</a>
-                    <div class="dropdown-content">
-                        <a href="#">Tops</a>
-                        <a href="#">Leggings</a>
-                        <a href="#">Outerwear</a>
+                        <a href="/products/All">All</a>
+                        <a href="/products/Baseball">Baseball</a>
+                        <a href="/products/Golf">Golf</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -45,6 +33,16 @@
                         <a href="#">Careers</a>
                     </div>
                 </li>
+                {% if request.user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="dropdown">
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+                
             </ul>
         </nav>
 
@@ -57,5 +55,14 @@
             <button type="submit"><img class="image-icons-search" src="{% static 'images/search_icon.png' %}"
                     alt="Search"></button>
         </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'cart' %}"><img class="cart-icon" src="{% static 'images/cart.jpg' %}" alt="My Cart"></a>
+                    
+                </li>
+            </ul>
+        </nav>
+        
     </div>
 </header>

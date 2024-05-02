@@ -1,33 +1,24 @@
 
 from pyexpat.errors import messages
-from urllib import request
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 from .models import Category, Product, Color, Size, ProductVariation
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from django.views.decorators.http import require_POST
 from cart.models import Cart, CartItem
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 
 
 # Create your views here.
 def index(request):
-    """View function for home page of site."""
-    # Generate counts of some of the main objects
-
-    # Render the HTML template index.html with the data in the context variable.
     return render(request, 'index.html')
-
 
 # Product views
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
+    
 
     def get_queryset(self):
         category_name = self.kwargs['category_name']
@@ -38,6 +29,7 @@ class ProductListView(ListView):
         
 
 def product_detail(request, pk):
+    categories = Category.objects.all()
     product = get_object_or_404(Product, pk=pk)
     colors = Color.objects.all()
     sizes = Size.objects.all()
@@ -45,6 +37,7 @@ def product_detail(request, pk):
         'product': product,
         'colors': colors,
         'sizes': sizes,
+        'categories': categories,
     }
 
     if request.method == 'POST':
@@ -82,7 +75,7 @@ def product_detail(request, pk):
                 )
 
             messages.success(request, "Item added to cart.")
-            return redirect('index')  # Redirect to the product list page
+            return redirect(request.path)  # Redirect to the product list page
     return render(request, 'product_detail.html', context)
 
 def our_story(request):
