@@ -35,4 +35,15 @@ class ProductVariation(models.Model):
         unique_together = ('product', 'color', 'size')  # Ensures each combination is unique
 
     def __str__(self):
+
         return f"{self.product.name} - {self.color} - {self.size}"
+    
+class Career(models.Model):
+    name = models.CharField(max_length=75)
+    description = models.TextField()
+    responsibilities = models.TextField()
+    qualifications = models.TextField()
+
+    def __str__(self):
+        return self.name
+
