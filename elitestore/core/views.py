@@ -35,3 +35,8 @@ class ProductDetailView(DetailView):
     template_name = 'product_detail.html'
     context_object_name = 'product'
 
+def our_story(request):
+    return render(request, 'our_story.html')
+
+def meet_team(request):
+    return render(request, 'meet_team.html')
