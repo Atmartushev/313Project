@@ -21,7 +21,7 @@ def create_user(request):
             user = authenticate(username = username, password = password)
             login(request, user)
             messages.success(request, "Registration successfull")
-            return redirect('home')
+            return redirect(reverse('product_list') + '?category=all')
         else:
             messages.error(request, "Username already exists or password did not meet requirements.")
             return redirect('login')
@@ -41,7 +41,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been authenticated and successfully logged in.")
-            return redirect("home")
+            return redirect('/All/')
         else:
             messages.success(request, "This username or password is incorrect.")
             attempts_count+=1

@@ -10,7 +10,22 @@
             <h1>{{ product.name }}</h1>
             <p>{{ product.description }}</p>
             <p>Price: ${{ product.price }}</p>
-            <a href="{% url 'AddToCart' product.pk %}">Add to Cart</a>
+            <form method="post">
+                {% csrf_token %}
+                <label for="color">Color:</label>
+                <select class="form-select" id="color" name="color">
+                    {% for color in colors %}
+                        <option value="{{ color.name }}">{{ color.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="size">Size:</label>
+                <select class="form-select" id="size" name="size">
+                    {% for size in sizes %}
+                        <option value="{{ size.name }}">{{ size.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
         </div>
     </div>
 </div>
