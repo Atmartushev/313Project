@@ -43,3 +43,12 @@ class ProductVariation(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.color.name} - {self.size.name}"
+    
+class Career(models.Model):
+    name = models.CharField(max_length=75)
+    description = models.TextField()
+    responsibilities = models.TextField()
+    qualifications = models.TextField()
+
+    def __str__(self):
+        return self.name

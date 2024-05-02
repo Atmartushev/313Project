@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<div class="container">
+    <h1>Elite Athlete Outlet Careers</h1>
+    <p>At Elite Athlete Outlet, we are committed to providing exceptional customer service around the clock.</p>
+    <p>Below are job opportunities and employee stories about working at Elite Athlete Outlet:</p>
+    {% for career in career_list %}
+    <h3><a href="{% url 'career_detail' career.pk%}">{{career.name}}</a></h3>
+    <h5>Job Description</h5>
+    {{career.description}}
+    {% endfor %}
+</div>
+{% endblock %}

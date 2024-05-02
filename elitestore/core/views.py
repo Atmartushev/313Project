@@ -2,7 +2,7 @@
 from pyexpat.errors import messages
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Category, Product, Color, Size, ProductVariation
+from .models import Category, Product, Color, Size, ProductVariation, Career
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -83,3 +83,17 @@ def our_story(request):
 
 def meet_team(request):
     return render(request, 'meet_team.html')
+
+def career_list(request):
+    career = Career.objects.all()
+    context = {
+        'career_list': career,
+    }
+    return render(request, 'career_list.html', context)
+
+def career_detail(request, pk):
+    career = Career.objects.get(pk=pk)
+    context = {
+        'career': career,
+    }
+    return render(request, 'careers.html', context)

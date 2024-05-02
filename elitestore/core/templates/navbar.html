@@ -30,7 +30,7 @@
                     <div class="dropdown-content">
                         <a href="{% url 'our_story' %}">Our Story</a>
                         <a href="{% url 'meet_team' %}">Meet the Team</a>
-                        <a href="#">Careers</a>
+                        <a href="{% url 'career_list' %}">Careers</a>
                     </div>
                 </li>
                 {% if request.user.is_authenticated %}

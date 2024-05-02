@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<div class="container">
+    <h1>{{career.name}}</h1>
+    <p></p>
+    <h5>Job Description</h5>
+    {{career.description}}
+    <h5>Employee Responsibilities</h5>
+    {{career.responsibilities}}
+    <h5>Preferred Qualifications</h5>
+    {{career.qualifications}}
+</div>
+{% endblock %}
