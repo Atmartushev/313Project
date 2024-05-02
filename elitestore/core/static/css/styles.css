@@ -46,26 +46,17 @@ nav ul li {
   display: block;
 }
 
-html,
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  flex-shrink: 0; /* This will prevent the footer from shrinking */
-}
-
 .top-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
   background-color: #fff;
+  margin-right: -20px;
 }
 
 .logo img {
-  height: 100px;
+  height: 12vh;
 }
 
 nav ul {
@@ -122,7 +113,40 @@ a.chevron:hover::after {
   cursor: pointer;
 }
 .icons-social img {
-  height: 50px;
-  width: 50px;
+  height: 5vh;
+  width: 5vh;
   margin-right: 15px;
+}
+
+html,
+body {
+  height: 100%; /* Ensure the html and body are full height */
+  width: 100%;
+  margin: 0;
+  padding: 0%;
+}
+
+body {
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  min-height: 100vh; /* Minimum height of 100% of the viewport height */
+}
+
+footer {
+  margin-top: auto; /* Automatically pushes the footer to the bottom */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.image-icons-search {
+  height: 3vh;
 }

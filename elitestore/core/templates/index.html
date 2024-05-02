@@ -2,53 +2,65 @@
 
 {% block content %}
 {% load static %}
-
-<div class="carousel">
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'images/baseball.png' %}" alt="Baseball Sale">
+    <div class="carousel-item active" data-bs-interval="5000">
+      <img src="{% static 'images/baseball.png' %}" class="d-block w-100" alt="Baseball Sale">
     </div>
-    <div class="carousel-item">
-      <img src="{% static 'images/footballs.png' %}" alt="More Baseball Deals">
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="{% static 'images/footballs.png' %}" class="d-block w-100" alt="More Baseball Deals">
     </div>
     <!-- Add more items here -->
   </div>
-  <a class="carousel-control-prev" href="#" role="button" data-slide="prev">
-    <img class="carousel-control-prev-icon" src="{% static 'images/chevron.png' %}" alt="Previous">
-  </a>
-  <a class="carousel-control-next" href="#" role="button" data-slide="next">
-    <img class="carousel-control-next-icon" src="{% static 'images/chevron.png' %}" alt="Next">
-  </a>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
+<div class="container-fluid  mt-4 card-bodies">
+  <h1 class="text-center">Collections</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a href="/Football/">
+        <div class="card">
+          <img src="{% static 'images/tbrady.png' %}" class="card-img-top" alt="Football">
+          <div class="card-text">Football</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/Golf/">
+        <div class="card">
+          <img src="{% static 'images/twoods.png' %}" class="card-img-top" alt="Golf">
+          <div class="card-text">Golf</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/Basketball/">
+        <div class="card">
+          <img src="{% static 'images/bgriffin.png' %}" class="card-img-top" alt="Basketball">
+          <div class="card-text">Basketball</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <a href="/Baseball/">
+        <div class="card">
 
-<script>
-  document.querySelectorAll('.carousel-control-prev').forEach(item => {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-      moveSlide('prev');
-    });
-  });
+          <img src="{% static 'images/shohei.png' %}" class="card-img-top-baseball" alt="Baseball">
+          <div class="card-text">Baseball</div>
 
-  document.querySelectorAll('.carousel-control-next').forEach(item => {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-      moveSlide('next');
-    });
-  });
-
-  function moveSlide(direction) {
-    let currentSlide = document.querySelector('.carousel-item.active');
-    let nextSlide = (direction === 'next') ? currentSlide.nextElementSibling : currentSlide.previousElementSibling;
-
-    if (!nextSlide) {
-      nextSlide = (direction === 'next') ?
-        document.querySelector('.carousel-inner').firstElementChild :
-        document.querySelector('.carousel-inner').lastElementChild;
-    }
-
-    currentSlide.classList.remove('active');
-    nextSlide.classList.add('active');
-  }
-</script>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

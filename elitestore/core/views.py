@@ -21,7 +21,7 @@ def index(request):
     # Generate counts of some of the main objects
 
     # Render the HTML template index.html with the data in the context variable.
-    return render(request, 'index.html', {'load_bootstrap': False})
+    return render(request, 'index.html')
 
 
 # Product views
@@ -83,5 +83,10 @@ def product_detail(request, pk):
 
             messages.success(request, "Item added to cart.")
             return redirect('index')  # Redirect to the product list page
-
     return render(request, 'product_detail.html', context)
+
+def our_story(request):
+    return render(request, 'our_story.html')
+
+def meet_team(request):
+    return render(request, 'meet_team.html')

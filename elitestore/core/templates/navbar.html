@@ -2,17 +2,23 @@
 <header>
     <div class="top-nav">
         <div class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="Elite Athlete Outlet">
+            <a href="/">
+                <img src="{% static 'images/logo.png' %}" alt="Elite Athlete Outlet">
+            </a>
         </div>
         <nav>
             <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="chevron-link">Sports</a>
                     <div class="dropdown-content">
                         <a href="/All/">All sports</a>
                         <a href="/Baseball/">Baseball</a>
                         <a href="/Basketball/">Basketball</a>
-                        <a href="/Soccer/">Soccer</a>
+                        <a href="/Golf/">Golf</a>
+                        <a href="/Football/">Golf</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -34,8 +40,8 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="chevron-link">About Us</a>
                     <div class="dropdown-content">
-                        <a href="#">Our Story</a>
-                        <a href="#">Meet the Team</a>
+                        <a href="{% url 'our_story' %}">Our Story</a>
+                        <a href="{% url 'meet_team' %}">Meet the Team</a>
                         <a href="#">Careers</a>
                     </div>
                 </li>
@@ -48,7 +54,7 @@
         </div>
         <div class="search">
             <input type="text" placeholder="Search">
-            <button type="submit"><img class="image-icons" src="{% static 'images/search-icon.png' %}"
+            <button type="submit"><img class="image-icons-search" src="{% static 'images/search_icon.png' %}"
                     alt="Search"></button>
         </div>
     </div>
