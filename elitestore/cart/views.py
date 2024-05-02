@@ -6,7 +6,18 @@ from .models import Cart, CartItem
 from core.models import ProductVariation, Product, Color, Size
 
 # Create your views here.
-class CartListView(ListView):
-    model = CartItem
-    template_name = 'cart.html'
-    context_object_name = 'cart_item'
+def cart_items_view(request):
+    # Check if the user is authenticated
+    if request.user.is_authenticated:
+        # Retrieve the user's cart
+        user_cart = request.user.cart
+
+        # Retrieve all cart items related to the user's cart
+        cart_items = CartItem.objects.filter(cart=user_cart)
+
+        # Pass the cart items to the template for rendering
+        context = {'cart_items': cart_items}
+        return render(request, 'cart.html', context)
+    else:
+        # Handle the case where the user is not authenticated
+        return render(request, 'login.html')
