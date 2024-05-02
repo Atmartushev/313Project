@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import Product, Category, Size, Color, ProductVariation, Career
-
+from .models import Product, Category, ProductVariation, Career, Sport
 
 admin.site.register(Product)
 admin.site.register(Category)
-admin.site.register(Size)
-admin.site.register(Color)
 admin.site.register(ProductVariation)
+admin.site.register(Sport)
 admin.site.register(Career)
+

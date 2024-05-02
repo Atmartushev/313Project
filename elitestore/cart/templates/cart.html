@@ -9,16 +9,16 @@
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Total</th>
+                <th>Item Total</th>
             </tr>
         </thead>
         <tbody>
             {% for item in cart_items %}
             <tr>
                 <td>{{ item.product_variation }}</td>
-                <td>${{ item.product_variation.price }}</td>
+                <td>${{ item.product_variation.product.price }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>${{ item.product_variation.price }}</td>
+                <td>${{ item.item_total }}</td>
             </tr>
             {% endfor %}
         </tbody>

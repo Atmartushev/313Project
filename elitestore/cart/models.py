@@ -1,5 +1,4 @@
 from django.db import models
-from account.models import UserProfile
 from core.models import ProductVariation
 from django.contrib.auth.models import User
 

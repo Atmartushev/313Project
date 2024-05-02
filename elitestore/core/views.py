@@ -2,7 +2,7 @@
 from pyexpat.errors import messages
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Category, Product, Color, Size, ProductVariation, Career
+from .models import Category, Product, ProductVariation, Career
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
@@ -31,52 +31,43 @@ class ProductListView(ListView):
 def product_detail(request, pk):
     categories = Category.objects.all()
     product = get_object_or_404(Product, pk=pk)
-    colors = Color.objects.all()
-    sizes = Size.objects.all()
-    context = {
-        'product': product,
-        'colors': colors,
-        'sizes': sizes,
-        'categories': categories,
-    }
+    product_variations = ProductVariation.objects.filter(product=product)
+    colors = set(pv.color for pv in product_variations)
+    sizes = set(pv.size for pv in product_variations)
 
     if request.method == 'POST':
         color = request.POST.get('color')
         size = request.POST.get('size')
-        # Check if color and size are provided
-        if color and size:
-            # Find the corresponding color and size objects
-            color_obj = get_object_or_404(Color, name=color)
-            size_obj = get_object_or_404(Size, name=size)
-            
-            # Create or get the product variation
-            product_variation, _ = ProductVariation.objects.get_or_create(
-                product=product,
-                color=color_obj,
-                size=size_obj
-            )
+        
+        product_variation = ProductVariation.objects.filter(product=product, color=color, size=size).first()
 
-            # Create or get the cart associated with the user
+        if product_variation:
             cart, _ = Cart.objects.get_or_create(user_profile=request.user)
-
-            # Check if the cart item already exists
             cart_item = CartItem.objects.filter(cart=cart, product_variation=product_variation).first()
 
             if cart_item:
-                # If the cart item already exists, increase its quantity by 1
                 cart_item.quantity += 1
                 cart_item.save()
             else:
-                # If the cart item does not exist, create it
-                cart_item = CartItem.objects.create(
-                    cart=cart,
-                    product_variation=product_variation,
-                    quantity=1
-                )
+                CartItem.objects.create(cart=cart, product_variation=product_variation, quantity=1)
 
             messages.success(request, "Item added to cart.")
-            return redirect(request.path)  # Redirect to the product list page
+            return redirect(request.path)
+        else:
+            messages.success(request, "The selected color and size combination does not exist.")
+            return redirect(request.path)
+
+    context = {
+        'product': product,
+        'categories': categories,
+        'product_variations': product_variations,
+        'colors': colors,
+        'sizes': sizes,
+    }
+
     return render(request, 'product_detail.html', context)
+
+
 
 def our_story(request):
     return render(request, 'our_story.html')
