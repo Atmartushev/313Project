@@ -21,6 +21,46 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+<div class="container-fluid  mt-4 card-bodies">
+  <h1 class="text-center">Collections</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <a href="/Football/">
+        <div class="card">
+          <img src="{% static 'images/tbrady.png' %}" class="card-img-top" alt="Football">
+          <div class="card-text">Football</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/Golf/">
+        <div class="card">
+          <img src="{% static 'images/twoods.png' %}" class="card-img-top" alt="Golf">
+          <div class="card-text">Golf</div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="/Basketball/">
+        <div class="card">
+          <img src="{% static 'images/bgriffin.png' %}" class="card-img-top" alt="Basketball">
+          <div class="card-text">Basketball</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <a href="/Baseball/">
+        <div class="card">
 
+          <img src="{% static 'images/shohei.png' %}" class="card-img-top-baseball" alt="Baseball">
+          <div class="card-text">Baseball</div>
+
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
