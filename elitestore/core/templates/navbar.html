@@ -1,70 +1,68 @@
 {% load static %}
-<header>
-    <div class="top-nav">
-        <div class="logo">
-            <a href="/">
-                <img src="{% static 'images/logo.png' %}" alt="Elite Athlete Outlet">
-            </a>
-        </div>
-        <nav>
-            <ul>
-                <li>
-                    {% if request.user.is_authenticated %}
-                    <h1>Welcome {{ user.username|title }}!</h1>
-                    {% endif %}
-                </li>
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="chevron-link">Sports</a>
-                    <div class="dropdown-content">
-                        <a href="/All">All</a>
-                        <a href="/Baseball">Baseball</a>
-                        <a href="/Golf">Golf</a>
-                        <a href="/Basketball">Basketball</a>
-                        <a href="/Football">Football</a>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a href="javascript:void(0)" class="chevron-link">About Us</a>
-                    <div class="dropdown-content">
-                        <a href="{% url 'our_story' %}">Our Story</a>
-                        <a href="{% url 'meet_team' %}">Meet the Team</a>
-                        <a href="{% url 'career_list' %}">Careers</a>
-                    </div>
-                </li>
-                {% if request.user.is_authenticated %}
-                <li class="dropdown">
-                    <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="dropdown">
-                    <a href="{% url 'login' %}">Login</a>
-                </li>
-                {% endif %}
-
-            </ul>
-        </nav>
-
-        <div class="icons-social">
-            <a href="#"><img src="{% static 'images/instagram-icon.png' %}" alt="Instagram"></a>
-            <a href="#"><img src="{% static 'images/twitter-logo.png' %}" alt="Twitter"></a>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="Search">
-            <button type="submit"><img class="image-icons-search" src="{% static 'images/search_icon.png' %}"
-                    alt="Search"></button>
-        </div>
-        <nav>
-            <ul>
-                <li>
-                    <a href="{% url 'cart' %}"><img class="cart-icon" src="{% static 'images/cart.jpg' %}"
-                            alt="My Cart"></a>
-
-                </li>
-            </ul>
-        </nav>
-
+<div class="top-nav">
+    <div class="logo">
+        <a href="/">
+            <img src="{% static 'images/logo.png' %}" alt="Elite Athlete Outlet">
+        </a>
     </div>
-</header>
+    <nav>
+        <ul>
+            <li>
+                {% if request.user.is_authenticated %}
+                <h1>Welcome {{ user.username|title }}!</h1>
+                {% endif %}
+            </li>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="chevron-link">Sports</a>
+                <div class="dropdown-content">
+                    <a href="/All">All</a>
+                    <a href="/Baseball">Baseball</a>
+                    <a href="/Golf">Golf</a>
+                    <a href="/Basketball">Basketball</a>
+                    <a href="/Football">Football</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="chevron-link">About Us</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'our_story' %}">Our Story</a>
+                    <a href="{% url 'meet_team' %}">Meet the Team</a>
+                    <a href="{% url 'career_list' %}">Careers</a>
+                </div>
+            </li>
+            {% if request.user.is_authenticated %}
+            <li class="dropdown">
+                <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="dropdown">
+                <a href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+    <div class="icons-social">
+        <a href="#"><img src="{% static 'images/instagram-icon.png' %}" alt="Instagram"></a>
+        <a href="#"><img src="{% static 'images/twitter-logo.png' %}" alt="Twitter"></a>
+    </div>
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="query" placeholder="Search">
+        <button type="submit"><img class="image-icons-search" src="{% static 'images/search_icon.png' %}"
+                alt="Search"></button>
+    </form>
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'cart' %}"><img class="cart-icon" src="{% static 'images/cart.jpg' %}"
+                        alt="My Cart"></a>
+
+            </li>
+        </ul>
+    </nav>
+
+</div>

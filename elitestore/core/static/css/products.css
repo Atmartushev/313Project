@@ -1,0 +1,19 @@
+/* Adjusting margins between columns */
+.my-col {
+  margin: 10px; /* Small margin for aesthetics */
+}
+
+.card-body {
+  text-align: center;
+  border-top: 3px solid teal;
+}
+/* Optional: Adjust card sizing to ensure they do not stretch too wide */
+.card.products {
+  width: 90%; /* Adjust width as needed, or set max-width */
+  margin-left: 30px;
+  margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none;
+}

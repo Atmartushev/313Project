@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from cart.models import Cart, CartItem
+from .forms import SearchForm
 
 
 
@@ -89,3 +90,12 @@ def career_detail(request, pk):
         'career': career,
     }
     return render(request, 'careers.html', context)
+
+def search(request):
+    form = SearchForm(request.GET)
+    if form.is_valid():
+        query = form.cleaned_data['query']
+        results = Product.objects.filter(name__icontains=query)
+        return render(request, 'search_results.html', {'form': form, 'results': results})
+    else:
+        return render(request, 'search_results.html', {'form': form})

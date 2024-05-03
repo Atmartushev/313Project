@@ -1,19 +1,31 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1 class="text-center">{{ view.kwargs.category_name }} Products</h1>
-<div class="container-fluid mt-4 card-bodies">
-    <div class="row justify-content">
-        {% for product in object_list %}
-        <div class="col-md-4">
-            <div class="card">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
-                <h4>{{ product.name }}</h4>
-                <p>{{ product.description }}</p>
-                <a href="{% url 'product_detail' pk=product.pk %}" class="btn btn-primary">Shop</a>
-            </div>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+<div class="container-fluid mt-4">
+    <h1 class="text-center">{{ view.kwargs.category_name }} Products</h1>
+    {% for product in object_list %}
+    {% if forloop.first or forloop.counter0|divisibleby:3 %}
+    {% if not forloop.first %}
+</div> <!-- End previous row if not the first loop iteration -->
+{% endif %}
+<div class="row"> <!-- Start a new row -->
+    {% endif %}
+    <div class="col-md-4 d-flex ">
+        <div class="card products">
+            <a href="{% url 'product_detail' pk=product.pk %}" class="text-decoration-none text-reset">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h4>{{ product.name }}</h4>
+                    <p>{{ product.description }}</p>
+                </div>
         </div>
-        {% endfor %}
+        </a>
     </div>
+    {% if forloop.last %}
+</div> <!-- Close the last row -->
+{% endif %}
+{% endfor %}
 </div>
 {% endblock %}

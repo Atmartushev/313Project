@@ -11,6 +11,7 @@ urlpatterns = [
     path('meet-the-team/', views.meet_team, name = 'meet_team'),
     path('our-careers/', views.CareerListView.as_view(), name = 'career_list'),
     path('our-careers/<int:pk>/', views.career_detail, name = 'career_detail'),
+    path('search/', views.search, name='search'),
     path('<str:category_name>/', views.ProductListView.as_view(), name='product_list'),
 ]
 

@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+<h1 class="text-center">Search Results</h1>
+<div class="row">
+    {% for product in results %}
+    <div class="col-md-4 products ">
+        <div class="card products">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
+            <div class="card-body">
+                <h4>{{ product.name }}</h4>
+                <p>{{ product.description }}</p>
+                <a href="{% url 'product_detail' pk=product.pk %}" class="btn btn-primary">Shop</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <p>No results found.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
