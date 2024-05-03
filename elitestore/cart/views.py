@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect, reverse
 from .models import Cart, CartItem
 from account.models import Orders
 
-
 def cart_items_view(request):
     # Check if the user is authenticated
     if request.user.is_authenticated:
