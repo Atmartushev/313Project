@@ -86,6 +86,7 @@ nav ul li a {
   font-size: 30px;
   padding: 14px 16px;
   font-family: "Istok Web", sans-serif;
+  text-decoration: none;
 }
 
 a.chevron::after {
@@ -175,4 +176,12 @@ footer {
 
 .image-icons-search {
   height: 3vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.dropdown a {
+  text-decoration: none;
 }

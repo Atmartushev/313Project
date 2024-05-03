@@ -22,11 +22,11 @@ class ProductListView(ListView):
     
 
     def get_queryset(self):
-        self.category_name = self.kwargs['category_name']
-        if self.category_name=='All':
+        self.sport_name = self.kwargs['sport_name']
+        if self.sport_name=='All':
             return Product.objects.all()
         else:
-            return Product.objects.filter(category__name__iexact=self.category_name)
+            return Product.objects.filter(sport__name__iexact=self.sport_name)
         
 
 def product_detail(request, pk):
