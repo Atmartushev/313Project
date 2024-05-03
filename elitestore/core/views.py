@@ -1,15 +1,14 @@
 
 from pyexpat.errors import messages
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView
 from .models import Category, Product, ProductVariation, Career
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from cart.models import Cart, CartItem
 from .forms import SearchForm
-
-
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -22,13 +21,14 @@ class ProductListView(ListView):
     
 
     def get_queryset(self):
-        self.sport_name = self.kwargs['sport_name']
-        if self.sport_name=='All':
+        self.filter = self.kwargs['filter']
+        if self.filter=='All':
             return Product.objects.all()
         else:
-            return Product.objects.filter(sport__name__iexact=self.sport_name)
+            return Product.objects.filter(
+                Q(sport__name__iexact=self.filter) | Q(category__name__iexact=self.filter)
+            )
         
-
 def product_detail(request, pk):
     categories = Category.objects.all()
     product = get_object_or_404(Product, pk=pk)
@@ -56,7 +56,7 @@ def product_detail(request, pk):
             messages.success(request, "Item added to cart.")
             return redirect(request.path)
         else:
-            messages.success(request, "The selected color and size combination does not exist.")
+            messages.success(request, "Item is out of stock.")
             return redirect(request.path)
 
     context = {
@@ -68,8 +68,6 @@ def product_detail(request, pk):
     }
 
     return render(request, 'product_detail.html', context)
-
-
 
 def our_story(request):
     return render(request, 'our_story.html')
@@ -89,7 +87,7 @@ def career_detail(request, pk):
     context = {
         'career': career,
     }
-    return render(request, 'careers.html', context)
+    return render(request, 'career_detail.html', context)
 
 def search(request):
     form = SearchForm(request.GET)

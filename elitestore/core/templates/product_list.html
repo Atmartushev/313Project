@@ -3,8 +3,8 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/products.css' %}">
-<div class="container-fluid mt-4">
-    <h1 class="text-center">{{ view.kwargs.sport_name }} Products</h1>
+<div class="container-fluid">
+    <h1 class="text-center my-3">{{ view.kwargs.filter }}</h1>
     {% for product in object_list %}
     {% if forloop.first or forloop.counter0|divisibleby:3 %}
     {% if not forloop.first %}

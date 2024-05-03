@@ -1,9 +1,7 @@
 from django.contrib import messages
-from urllib import request
-from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse
 from .models import Cart, CartItem
+from account.models import Orders
 
 
 def cart_items_view(request):
@@ -29,7 +27,9 @@ def cart_items_view(request):
         
 
         # Pass the cart items, item totals, and total price to the template for rendering
-        context = {'cart_items': cart_items, 'total_price': total_price}
+        context = {'cart_items': cart_items, 
+                   'total_price': total_price,
+                   'cart': cart}
         return render(request, 'cart.html', context)
     else:
         # Handle the case where the user is not authenticated
@@ -39,11 +39,6 @@ def delete_cart_item(request, pk):
     cart_item = CartItem.objects.get(pk=pk)
     cart_item.delete()
     return redirect('cart')
-    
-def delete_cart(request):
-    cart = Cart.objects.get(user_profile=request.user)
-    cart.delete()
-    return redirect('index')
 
 def update_cart(request, pk):
     quantity = request.POST.get('quantity')
@@ -56,3 +51,8 @@ def update_cart(request, pk):
     cart_item.save()
     messages.success(request, "Cart item quantity updated successfully.")
     return redirect('cart')
+
+def create_order(request):
+    cart = Cart.objects.get(user_profile=request.user)
+    Orders.objects.create(user=request.user, cart=cart)
+    return redirect('account')

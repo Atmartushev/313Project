@@ -18,11 +18,25 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="chevron-link">Sports</a>
                 <div class="dropdown-content">
-                    <a href="{% url 'product_list' sport_name='All' %}">All</a>
-                    <a href="{% url 'product_list' sport_name='Baseball' %}">Baseball</a>
-                    <a href="{% url 'product_list' sport_name='Golf' %}">Golf</a>
-                    <a href="{% url 'product_list' sport_name='Basketball' %}">Basketball</a>
-                    <a href="{% url 'product_list' sport_name='Football' %}">Football</a>
+                    <a href="{% url 'product_list' filter='All' %}">All</a>
+                    <a href="{% url 'product_list' filter='Baseball' %}">Baseball</a>
+                    <a href="{% url 'product_list' filter='Golf' %}">Golf</a>
+                    <a href="{% url 'product_list' filter='Basketball' %}">Basketball</a>
+                    <a href="{% url 'product_list' filter='Football' %}">Football</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="chevron-link">Categories</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'product_list' filter='All' %}">All</a>
+                    <a href="{% url 'product_list' filter='Clothes' %}">Clothes</a>
+                    <a href="{% url 'product_list' filter='Hats' %}">Hats</a>
+                    <a href="{% url 'product_list' filter='Shorts' %}">Shorts</a>
+                    <a href="{% url 'product_list' filter='Pants' %}">Pants</a>
+                    <a href="{% url 'product_list' filter='Shirts' %}">Shirts</a>
+                    <a href="{% url 'product_list' filter='Gloves' %}">Gloves</a>
+                    <a href="{% url 'product_list' filter='Shoes' %}">Shoes</a>
+                    <a href="{% url 'product_list' filter='Equipment' %}">Equipment</a>
                 </div>
             </li>
             <li class="dropdown">
