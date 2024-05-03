@@ -16,9 +16,9 @@ def create_user(request):
             form.save()
             username = form.data['username']
             password = form.cleaned_data['password1']
-            email = form.cleaned_data['email']
-            user = authenticate(username = username, password = password, email = email)
+            user = authenticate(username = username, password = password)
             login(request, user)
+
             messages.success(request, "Registration successfull")
             return redirect(reverse('index'))
         else:
@@ -55,26 +55,32 @@ def logout_user(request):
 
 def account(request):
     if request.user.is_authenticated:
-      cart = Cart.objects.get(user_profile=request.user)
-      cart_items = CartItem.objects.filter(cart=cart)
-      orders = Orders.objects.filter(user=request.user)
+      
+        cart = Cart.objects.filter(user_profile=request.user).first()
+        if cart:
+            cart_items = CartItem.objects.filter(cart=cart)
+            orders = Orders.objects.filter(user=request.user)
 
-      total_price = 0
-      for item in cart_items:
-        item_total = item.quantity * item.product_variation.product.price
-        item.item_total = item_total  # Add item_total attribute to the item object
-        total_price += item_total
+            total_price = 0
+            for item in cart_items:
+                item_total = item.quantity * item.product_variation.product.price
+                item.item_total = item_total  # Add item_total attribute to the item object
+                total_price += item_total
 
-    # Convert cart_items to a list to allow adding attributes dynamically
-    cart_items_list = list(cart_items)
-    # Add item_total attribute to each item object in the list
-    for item in cart_items_list:
-        item.item_total = item.quantity * item.product_variation.product.price
+                # Convert cart_items to a list to allow adding attributes dynamically
+                cart_items_list = list(cart_items)
+                # Add item_total attribute to each item object in the list
+                for item in cart_items_list:
+                    item.item_total = item.quantity * item.product_variation.product.price
+        else:
+            cart_items=None
+            total_price=0
+            orders=None
 
-    context = {'cart_items': cart_items, 
+        context = {'cart_items': cart_items, 
                    'total_price': total_price,
                    'cart': cart,
                    'orders': orders}
-    return render(request, "account.html", context)
+        return render(request, "account.html", context)
     else:
         return redirect('login')

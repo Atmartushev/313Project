@@ -30,44 +30,47 @@ class ProductListView(ListView):
             )
         
 def product_detail(request, pk):
-    categories = Category.objects.all()
-    product = get_object_or_404(Product, pk=pk)
-    product_variations = ProductVariation.objects.filter(product=product)
-    colors = set(pv.color for pv in product_variations)
-    sizes = set(pv.size for pv in product_variations)
+    if request.user.is_authenticated:
+        categories = Category.objects.all()
+        product = get_object_or_404(Product, pk=pk)
+        product_variations = ProductVariation.objects.filter(product=product)
+        colors = set(pv.color for pv in product_variations)
+        sizes = set(pv.size for pv in product_variations)
 
-    if request.method == 'POST':
-        color = request.POST.get('color')
-        size = request.POST.get('size')
-        quantity = request.POST.get('quantity')
+        if request.method == 'POST':
+            color = request.POST.get('color')
+            size = request.POST.get('size')
+            quantity = request.POST.get('quantity')
         
-        product_variation = ProductVariation.objects.filter(product=product, color=color, size=size).first()
+            product_variation = ProductVariation.objects.filter(product=product, color=color, size=size).first()
 
-        if product_variation:
-            cart, _ = Cart.objects.get_or_create(user_profile=request.user)
-            cart_item, created = CartItem.objects.get_or_create(cart=cart, product_variation=product_variation)
+            if product_variation:
+                cart, _ = Cart.objects.get_or_create(user_profile=request.user)
+                cart_item, created = CartItem.objects.get_or_create(cart=cart, product_variation=product_variation)
             
-            if cart_item:
-                cart_item.quantity += int(quantity)
-                cart_item.save()
+                if cart_item:
+                    cart_item.quantity += int(quantity)
+                    cart_item.save()
+                else:
+                    CartItem.objects.create(cart=cart, product_variation=product_variation, quantity=1)
+
+                messages.success(request, "Item added to cart.")
+                return redirect(request.path)
             else:
-                CartItem.objects.create(cart=cart, product_variation=product_variation, quantity=1)
+                messages.success(request, "Item is out of stock.")
+                return redirect(request.path)
 
-            messages.success(request, "Item added to cart.")
-            return redirect(request.path)
-        else:
-            messages.success(request, "Item is out of stock.")
-            return redirect(request.path)
+        context = {
+            'product': product,
+            'categories': categories,
+            'product_variations': product_variations,
+            'colors': colors,
+            'sizes': sizes,
+        }
 
-    context = {
-        'product': product,
-        'categories': categories,
-        'product_variations': product_variations,
-        'colors': colors,
-        'sizes': sizes,
-    }
-
-    return render(request, 'product_detail.html', context)
+        return render(request, 'product_detail.html', context)
+    else:
+        return redirect('login')
 
 def our_story(request):
     return render(request, 'our_story.html')
