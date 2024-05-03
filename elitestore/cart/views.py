@@ -1,4 +1,4 @@
-from pyexpat.errors import messages
+from django.contrib import messages
 from urllib import request
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -34,3 +34,25 @@ def cart_items_view(request):
     else:
         # Handle the case where the user is not authenticated
         return render(request, 'login.html')
+    
+def delete_cart_item(request, pk):
+    cart_item = CartItem.objects.get(pk=pk)
+    cart_item.delete()
+    return redirect('cart')
+    
+def delete_cart(request):
+    cart = Cart.objects.get(user_profile=request.user)
+    cart.delete()
+    return redirect('index')
+
+def update_cart(request, pk):
+    quantity = request.POST.get('quantity')
+    if not quantity.isdigit() or int(quantity) <= 0:
+        messages.error(request, "Invalid quantity.")
+        return redirect('cart')
+        
+    cart_item = CartItem.objects.get(pk=pk)
+    cart_item.quantity = int(quantity)
+    cart_item.save()
+    messages.success(request, "Cart item quantity updated successfully.")
+    return redirect('cart')

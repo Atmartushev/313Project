@@ -38,15 +38,16 @@ def product_detail(request, pk):
     if request.method == 'POST':
         color = request.POST.get('color')
         size = request.POST.get('size')
+        quantity = request.POST.get('quantity')
         
         product_variation = ProductVariation.objects.filter(product=product, color=color, size=size).first()
 
         if product_variation:
             cart, _ = Cart.objects.get_or_create(user_profile=request.user)
-            cart_item = CartItem.objects.filter(cart=cart, product_variation=product_variation).first()
-
+            cart_item, created = CartItem.objects.get_or_create(cart=cart, product_variation=product_variation)
+            
             if cart_item:
-                cart_item.quantity += 1
+                cart_item.quantity += int(quantity)
                 cart_item.save()
             else:
                 CartItem.objects.create(cart=cart, product_variation=product_variation, quantity=1)
