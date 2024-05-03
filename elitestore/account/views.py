@@ -50,3 +50,6 @@ def logout_user(request):
     logout(request)
     messages.success(request, "You have been successfully logged out")
     return redirect('index')
+
+def account(request):
+    return render(request, "account.html")

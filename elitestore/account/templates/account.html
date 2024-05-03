@@ -1,2 +1,28 @@
-<!--Account home page-->
-<h1>This is account page</h1>
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+    <h1>Account Information</h1>
+
+    <div id="account-details">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <!-- You can add more account details here -->
+    </div>
+
+    <h2>Previous Cart Items</h2>
+
+    <div id="cart-items">
+        {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                    <li>{{ item.name }} - {{ item.price }}</li>
+                    
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock content %}
