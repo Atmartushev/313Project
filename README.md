@@ -1,4 +1,4 @@
-# Elite Athelete Outlet
+# Elite Athlete Outlet
 
 ## Getting Started
 
