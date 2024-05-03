@@ -5,9 +5,8 @@
 <form method="post">
     {% csrf_token %}
     <div class="container border my-3 p-2">
-        <h3>{{product.name}}</h3>
-        
-        {% if colors %}
+        <h3>{{ product.name }}</h3>
+
             <label for="color">Color:</label>
             <select name="color" id="color">
                 {% for color in colors %}
@@ -17,8 +16,8 @@
                 {% endfor %}
             </select>
             <br>
-        {% endif %}
-        {% if sizes %}
+
+
             <label for="size">Size:</label>
             <select name="size" id="size">
                 {% for size in sizes %}
@@ -28,11 +27,12 @@
                 {% endfor %}
             </select>
             <br>
-        {% endif %}
+            
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" value="1">
+        <br>
         <button type="submit">Add to Cart</button>
     </div>
+    <a class="btn btn-primary" href="{% url 'cart' %}">Go to Cart</a>
 </form>
-
-<a href="{% url 'cart' %}">Go to Cart</a>
-
 {% endblock %}
