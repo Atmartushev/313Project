@@ -4,8 +4,8 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/products.css' %}">
 <div class="container-fluid mt-4">
-    <h1 class="text-center">{{ view.kwargs.category_name }} Products</h1>
-    {% for product in object_list %}
+    <h1 class="text-center">Search Results for "{{ query }}"</h1>
+    {% for product in results %}
     {% if forloop.first or forloop.counter0|divisibleby:3 %}
     {% if not forloop.first %}
 </div> <!-- End previous row if not the first loop iteration -->

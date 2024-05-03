@@ -1,15 +1,14 @@
 .carousel-item img {
-  height: 45vh; /* You can keep this if you want to control the height of images */
+  height: 50vh; /* You can keep this if you want to control the height of images */
 }
 
 .carousel {
-  position: relative; /* Ensures it is positioned relative to nearest positioned ancestor */
-  width: 100vw; /* Uses the viewport width unit to ensure it spans full width */
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw; /* Centers the carousel */
-  margin-right: -50vw;
+  width: 100% !important; /* Ensures width is always 100% of its container */
+  max-width: 100vw !important; /* Prevents the carousel from extending beyond the viewport width */
+  overflow: hidden; /* Adds overflow hidden to prevent any content from bleeding out */
+  margin: 0; /* Centers the carousel if needed and removes unwanted margin */
 }
+
 .carousel-control-prev,
 .carousel-control-next {
   width: auto;
@@ -59,8 +58,8 @@
   z-index: 2; /* Ensures the text is above the image and the pseudo-element */
   transition: transform 0.3s ease-in-out; /* Smooth transition for scale effect */
   text-align: center; /* Aligns the text to the center */
-  width: 100%; /* Ensures the text spans the full width of the card */
-  font-size: 4.8rem; /* Adjust the font size as needed */
+  width: 95%; /* Ensures the text spans the full width of the card */
+  font-size: 4vw; /* Adjust the font size as needed */
   color: white; /* Sets the text color to white */
 }
 

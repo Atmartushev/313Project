@@ -24,3 +24,8 @@ class AddToCartForm(forms.Form):
                     sizes = variations_with_both.filter(color=selected_color).values_list('size', flat=True).distinct()
                     self.fields['size'].widget.choices = [(size, size) for size in sizes]
 
+
+from django import forms
+
+class SearchForm(forms.Form):
+    query = forms.CharField()
