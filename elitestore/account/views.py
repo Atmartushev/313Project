@@ -16,10 +16,11 @@ def create_user(request):
             form.save()
             username = form.data['username']
             password = form.cleaned_data['password1']
-            user = authenticate(username = username, password = password)
+            email = form.cleaned_data['email']
+            user = authenticate(username = username, password = password, email = email)
             login(request, user)
             messages.success(request, "Registration successfull")
-            return redirect(reverse('product_list', kwargs={'category_name': "All"}))
+            return redirect(reverse('index'))
         else:
             messages.error(request, "Username already exists or password did not meet requirements.")
             return redirect('login')
@@ -39,7 +40,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been authenticated and successfully logged in.")
-            return redirect(reverse('product_list', kwargs={'category_name': "All"}))
+            return redirect(reverse('index'))
         else:
             messages.success(request, "This username or password is incorrect.")
             attempts_count+=1
@@ -53,12 +54,13 @@ def logout_user(request):
     return redirect('index')
 
 def account(request):
-    cart = Cart.objects.get(user_profile=request.user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    orders = Orders.objects.filter(user=request.user)
+    if request.user.is_authenticated:
+      cart = Cart.objects.get(user_profile=request.user)
+      cart_items = CartItem.objects.filter(cart=cart)
+      orders = Orders.objects.filter(user=request.user)
 
-    total_price = 0
-    for item in cart_items:
+      total_price = 0
+      for item in cart_items:
         item_total = item.quantity * item.product_variation.product.price
         item.item_total = item_total  # Add item_total attribute to the item object
         total_price += item_total
@@ -74,3 +76,5 @@ def account(request):
                    'cart': cart,
                    'orders': orders}
     return render(request, "account.html", context)
+    else:
+        return redirect('login')
