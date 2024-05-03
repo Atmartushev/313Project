@@ -24,7 +24,7 @@
   <h1 class="text-center">Collections</h1>
   <div class="row justify-content-center">
     <div class="col-md-3">
-      <a href="/Football/">
+      <a href="{% url 'product_list' filter='Football' %}">
         <div class="card">
           <img src="{% static 'images/tbrady.png' %}" class="card-img-top" alt="Football">
           <div class="card-text">Football</div>
@@ -32,7 +32,7 @@
       </a>
     </div>
     <div class="col-md-3">
-      <a href="/Golf/">
+      <a href="{% url 'product_list' filter='Golf' %}">
         <div class="card">
           <img src="{% static 'images/twoods.png' %}" class="card-img-top" alt="Golf">
           <div class="card-text">Golf</div>
@@ -40,7 +40,7 @@
       </a>
     </div>
     <div class="col-md-3">
-      <a href="/Basketball/">
+      <a href="{% url 'product_list' filter='Basketball' %}">
         <div class="card">
           <img src="{% static 'images/bgriffin.png' %}" class="card-img-top" alt="Basketball">
           <div class="card-text">Basketball</div>
@@ -50,7 +50,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-9">
-      <a href="/Baseball/">
+      <a href="{% url 'product_list' filter='Baseball' %}">
         <div class="card">
 
           <img src="{% static 'images/shohei.png' %}" class="card-img-top-baseball" alt="Baseball">

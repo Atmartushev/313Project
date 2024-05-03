@@ -1,9 +1,8 @@
 {% extends "base_generic.html" %}
 {% block content %}
-
+{% if cart_items %}
 <div class="container border my-3 p-2">
     <h1>Shopping Cart</h1>
-    {% if cart_items %}
     <table class="table">
         <thead>
             <tr>
@@ -38,13 +37,22 @@
         </tbody>
     </table>
     <p>Total Price: ${{ total_price }}</p>
-    <form method="post" action="{% url 'delete_cart' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete Cart</button>
-    </form>
-    {% else %}
-    <p>Your cart is empty.</p>
-    <a class="btn btn-primary" href="{% url 'index' %}">Shop</a>
-    {% endif %}
 </div>
+<div class="container my-3 p-2">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <form method="post" action="{% url 'create_order' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary my-2">Purhcase</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% else %}
+</div>
+<div class="container border my-3 p-2">
+    <h2>Your cart is empty.</h2>
+    <a class="btn btn-primary my-2" href="{% url 'product_list' filter='All'%}">Go Shop</a>
+</div>
+{% endif %}
 {% endblock %}

@@ -4,10 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import *
 from cart.models import Cart, CartItem
-from account.models import Orders
+from .models import Orders
 
 # Create your views here.
 def create_user(request):
@@ -56,11 +55,26 @@ def logout_user(request):
 
 def account(request):
     if request.user.is_authenticated:
-        # Retrieve the user's cart
-        cart = Cart.objects.get(user_profile=request.user)
-        cart_items = CartItem.objects.filter(cart=cart)
+      cart = Cart.objects.get(user_profile=request.user)
+      cart_items = CartItem.objects.filter(cart=cart)
+      orders = Orders.objects.filter(user=request.user)
 
-        # Pass the cart items to the template for rendering
-        return render(request, 'account.html', {'cart_items': cart_items})
+      total_price = 0
+      for item in cart_items:
+        item_total = item.quantity * item.product_variation.product.price
+        item.item_total = item_total  # Add item_total attribute to the item object
+        total_price += item_total
+
+    # Convert cart_items to a list to allow adding attributes dynamically
+    cart_items_list = list(cart_items)
+    # Add item_total attribute to each item object in the list
+    for item in cart_items_list:
+        item.item_total = item.quantity * item.product_variation.product.price
+
+    context = {'cart_items': cart_items, 
+                   'total_price': total_price,
+                   'cart': cart,
+                   'orders': orders}
+    return render(request, "account.html", context)
     else:
         return redirect('login')

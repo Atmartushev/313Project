@@ -3,29 +3,44 @@
 
 {% block content %}
 {% if request.user.is_authenticated %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/account.css' %}">
-<div class="account-page">
-    <h1 class="title">Account Information</h1>
 
-    <div class="account-details">
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <!-- You can add more account details here -->
-    </div>
-
-    <h2 class="subtitle">Previous Cart Items</h2>
-
-    <div class="cart-items">
-        {% if cart_items %}
-        <ul>
+<div class="container my-3">
+    <h1>Account Information</h1>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+</div>
+{% if orders %}
+<div class="container text-center">
+    <h2>Previous Orders</h2>
+</div>
+<div class="container border my-3 p-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Item Total</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for item in cart_items %}
-            <li class="cart-item">{{ item.product_variation }} - ${{ item.product_variation.product.price }}</li>
+            <tr>
+                <td>{{ item.product_variation }}</td>
+                <td>${{ item.product_variation.product.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.item_total }}</td>
+            </tr>
             {% endfor %}
-        </ul>
-        {% else %}
-        <p>Your cart is empty.</p>
-        {% endif %}
-    </div>
+        </tbody>
+    </table>
+    <p>Total Price: ${{ total_price }}</p>
+</div>
+{% else %}
+<div class="container text-center">
+    <p>You have no orders.</p>
 </div>
 {% endif %}
+{% endif %}
+
 {% endblock content %}

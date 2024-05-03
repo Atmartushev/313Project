@@ -3,8 +3,8 @@ from core.models import ProductVariation
 from django.contrib.auth.models import User
 
 class Cart(models.Model):
-    user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def total_price(self):
         return sum(item.product_variation.price * item.quantity for item in self.cartitem_set.all())
     
