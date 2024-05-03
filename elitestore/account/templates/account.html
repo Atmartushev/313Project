@@ -1,28 +1,31 @@
 {% extends 'base_generic.html' %}
-{% load static %}
-{% block content %}
-    {% if request.user.is_authenticated %}
-    <h1>Account Information</h1>
 
-    <div id="account-details">
+
+{% block content %}
+{% if request.user.is_authenticated %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/account.css' %}">
+<div class="account-page">
+    <h1 class="title">Account Information</h1>
+
+    <div class="account-details">
         <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
         <!-- You can add more account details here -->
     </div>
 
-    <h2>Previous Cart Items</h2>
+    <h2 class="subtitle">Previous Cart Items</h2>
 
-    <div id="cart-items">
+    <div class="cart-items">
         {% if cart_items %}
-            <ul>
-                {% for item in cart_items %}
-                    <li>{{ item.name }} - {{ item.price }}</li>
-                    
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for item in cart_items %}
+            <li class="cart-item">{{ item.product_variation }} - ${{ item.product_variation.product.price }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>Your cart is empty.</p>
+        <p>Your cart is empty.</p>
         {% endif %}
     </div>
-    {% endif %}
+</div>
+{% endif %}
 {% endblock content %}

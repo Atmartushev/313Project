@@ -6,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import *
+from cart.models import Cart, CartItem
+from account.models import Orders
 
 # Create your views here.
 def create_user(request):
@@ -15,10 +17,11 @@ def create_user(request):
             form.save()
             username = form.data['username']
             password = form.cleaned_data['password1']
-            user = authenticate(username = username, password = password)
+            email = form.cleaned_data['email']
+            user = authenticate(username = username, password = password, email = email)
             login(request, user)
             messages.success(request, "Registration successfull")
-            return redirect(reverse('product_list', kwargs={'category_name': "All"}))
+            return redirect(reverse('index'))
         else:
             messages.error(request, "Username already exists or password did not meet requirements.")
             return redirect('login')
@@ -38,7 +41,7 @@ def login_user(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been authenticated and successfully logged in.")
-            return redirect(reverse('product_list', kwargs={'category_name': "All"}))
+            return redirect(reverse('index'))
         else:
             messages.success(request, "This username or password is incorrect.")
             attempts_count+=1
@@ -52,4 +55,12 @@ def logout_user(request):
     return redirect('index')
 
 def account(request):
-    return render(request, "account.html")
+    if request.user.is_authenticated:
+        # Retrieve the user's cart
+        cart = Cart.objects.get(user_profile=request.user)
+        cart_items = CartItem.objects.filter(cart=cart)
+
+        # Pass the cart items to the template for rendering
+        return render(request, 'account.html', {'cart_items': cart_items})
+    else:
+        return redirect('login')
