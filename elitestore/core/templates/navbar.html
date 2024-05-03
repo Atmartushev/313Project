@@ -18,11 +18,11 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="chevron-link">Sports</a>
                 <div class="dropdown-content">
-                    <a href="/All">All</a>
-                    <a href="/Baseball">Baseball</a>
-                    <a href="/Golf">Golf</a>
-                    <a href="/Basketball">Basketball</a>
-                    <a href="/Football">Football</a>
+                    <a href="{% url 'product_list' sport_name='All' %}">All</a>
+                    <a href="{% url 'product_list' sport_name='Baseball' %}">Baseball</a>
+                    <a href="{% url 'product_list' sport_name='Golf' %}">Golf</a>
+                    <a href="{% url 'product_list' sport_name='Basketball' %}">Basketball</a>
+                    <a href="{% url 'product_list' sport_name='Football' %}">Football</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -35,7 +35,11 @@
             </li>
             {% if request.user.is_authenticated %}
             <li class="dropdown">
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="javascript:void(0)" class="chevron-link">Account</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'account' %}">Profile</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
             </li>
             {% else %}
             <li class="dropdown">

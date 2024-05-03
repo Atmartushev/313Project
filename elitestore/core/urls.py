@@ -12,6 +12,6 @@ urlpatterns = [
     path('our-careers/', views.CareerListView.as_view(), name = 'career_list'),
     path('our-careers/<int:pk>/', views.career_detail, name = 'career_detail'),
     path('search/', views.search, name='search'),
-    path('<str:category_name>/', views.ProductListView.as_view(), name='product_list'),
+    path('sports/<str:sport_name>/', views.ProductListView.as_view(), name='product_list'),
 ]
 

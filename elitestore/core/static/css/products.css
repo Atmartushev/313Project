@@ -17,3 +17,18 @@
 a {
   text-decoration: none;
 }
+
+.card-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img-products {
+  height: 300px; /* Adjust as needed */
+  width: 300px;
+}
+
+.product-price {
+  color: #41c2ff; /* Change the color as needed */
+}
