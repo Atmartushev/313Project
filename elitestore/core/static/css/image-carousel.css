@@ -58,8 +58,8 @@
   z-index: 2; /* Ensures the text is above the image and the pseudo-element */
   transition: transform 0.3s ease-in-out; /* Smooth transition for scale effect */
   text-align: center; /* Aligns the text to the center */
-  width: 100%; /* Ensures the text spans the full width of the card */
-  font-size: 4.8rem; /* Adjust the font size as needed */
+  width: 95%; /* Ensures the text spans the full width of the card */
+  font-size: 4vw; /* Adjust the font size as needed */
   color: white; /* Sets the text color to white */
 }
 

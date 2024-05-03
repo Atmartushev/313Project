@@ -95,7 +95,8 @@ def search(request):
     form = SearchForm(request.GET)
     if form.is_valid():
         query = form.cleaned_data['query']
+        querytext = request.GET.get('q')
         results = Product.objects.filter(name__icontains=query)
-        return render(request, 'search_results.html', {'form': form, 'results': results})
+        return render(request, 'search_results.html', {'form': form, 'results': results, 'query': query})
     else:
         return render(request, 'search_results.html', {'form': form})
