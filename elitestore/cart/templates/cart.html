@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
+
 <div class="container border my-3 p-2">
     <h1>Shopping Cart</h1>
     {% if cart_items %}
@@ -10,7 +11,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Item Total</th>
-                <th>Actions</th>  <!-- New column for delete button -->
+                <th>Actions</th> <!-- New column for delete button -->
             </tr>
         </thead>
         <tbody>
